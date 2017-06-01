@@ -1,2 +1,5 @@
 .s2i/environment
 node_modules
+coverage
+dist
+test-reports
