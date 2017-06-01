@@ -33,11 +33,39 @@ class JvmListController {
     jvmListService.getSystems().then(
       resp => {
         this.showErr = false;
-        this.systems = resp.data;
+        this.systems = resp.data.response;
+
+        for (let i = 0; i < this.systems.length; i++) {
+          let system = this.systems[i];
+          for (let j = 0; j < system.jvms.length; j++) {
+            let jvm = system.jvms[j];
+            this.systems[i].jvms[j].mainClass = this.compactMainClass(jvm.mainClass);
+          }
+        }
       },
       () => {
         this.showErr = true;
       });
+  }
+
+  compactMainClass (className) {
+    if (className.length < 38) {
+      return className;
+    }
+
+    let split = className.split('.');
+    let compacted = '';
+    for (let i = 0; i < split.length - 1; i++) {
+      let s = split[i];
+      compacted += s.charAt(0) + '.';
+    }
+    compacted += split[split.length - 1];
+
+    if (compacted.length < 38) {
+      return compacted;
+    }
+
+    return split[split.length - 1];
   }
 }
 

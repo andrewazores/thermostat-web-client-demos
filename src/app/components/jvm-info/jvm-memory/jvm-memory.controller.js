@@ -72,10 +72,12 @@ class JvmMemoryController {
   }
 
   update () {
+    let getNumber = val => parseInt(val['$numberLong']);
+
     this.jvmMemoryService.getJvmMemory(this.jvmId).then(resp => {
       let data = resp.data.response[0];
-      this.metaspaceData.used = data.metaspaceUsed;
-      this.metaspaceData.total = data.metaspaceCapacity;
+      this.metaspaceData.used = getNumber(data.metaspaceUsed);
+      this.metaspaceData.total = getNumber(data.metaspaceCapacity);
 
       for (let i = 0; i < data.generations.length; i++) {
         let generation = data.generations[i];
@@ -93,13 +95,13 @@ class JvmMemoryController {
         for (let j = 0; j < generation.spaces.length; j++) {
           let space = generation.spaces[j];
           if (gen.spaces.hasOwnProperty(space.index)) {
-            gen.spaces[space.index].used = space.used;
-            gen.spaces[space.index].total = space.capacity;
+            gen.spaces[space.index].used = getNumber(space.used);
+            gen.spaces[space.index].total = getNumber(space.capacity);
           } else {
             gen.spaces[space.index] = {
               index: space.index,
-              used: space.used,
-              total: space.capacity
+              used: getNumber(space.used),
+              total: getNumber(space.capacity)
             };
           }
           let spaceKey = 'gen-' + gen.index + '-space-' + space.index;

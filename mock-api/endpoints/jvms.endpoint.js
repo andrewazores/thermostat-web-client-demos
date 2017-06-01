@@ -5,108 +5,110 @@ function jvmList (server) {
     server.logRequest('jvm-list', req);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(
-      [
-        {
-          "systemId": "system-0",
-          "jvms": [
-            {
-              "mainClass": "c.r.t.A",
-              "startTime": 45000,
-              "jvmId": "vm-0"
-            },
-            {
-              "mainClass": "c.r.t.B",
-              "startTime": 45000,
-              "jvmId": "vm-1"
-            },
-            {
-              "mainClass": "c.r.t.C",
-              "startTime": 45000,
-              "jvmId": "vm-2"
-            },
-            {
-              "mainClass": "c.r.t.D",
-              "startTime": 45000,
-              "jvmId": "vm-3"
-            }
-          ]
-        },
-        {
-          "systemId": "system-1",
-          "jvms": [
-            {
-              "mainClass": "c.r.t.A",
-              "startTime": 45000,
-              "jvmId": "vm-0"
-            },
-            {
-              "mainClass": "c.r.t.B",
-              "startTime": 45000,
-              "jvmId": "vm-1"
-            },
-            {
-              "mainClass": "c.r.t.C",
-              "startTime": 45000,
-              "jvmId": "vm-2"
-            },
-            {
-              "mainClass": "c.r.t.D",
-              "startTime": 45000,
-              "jvmId": "vm-3"
-            }
-          ]
-        },
-        {
-          "systemId": "system-2",
-          "jvms": [
-            {
-              "mainClass": "c.r.t.A",
-              "startTime": 45000,
-              "jvmId": "vm-0"
-            },
-            {
-              "mainClass": "c.r.t.B",
-              "startTime": 45000,
-              "jvmId": "vm-1"
-            },
-            {
-              "mainClass": "c.r.t.C",
-              "startTime": 45000,
-              "jvmId": "vm-2"
-            },
-            {
-              "mainClass": "c.r.t.D",
-              "startTime": 45000,
-              "jvmId": "vm-3"
-            }
-          ]
-        },
-        {
-          "systemId": "system-3",
-          "jvms": [
-            {
-              "mainClass": "c.r.t.A",
-              "startTime": 45000,
-              "jvmId": "vm-0"
-            },
-            {
-              "mainClass": "c.r.t.B",
-              "startTime": 45000,
-              "jvmId": "vm-1"
-            },
-            {
-              "mainClass": "c.r.t.C",
-              "startTime": 45000,
-              "jvmId": "vm-2"
-            },
-            {
-              "mainClass": "c.r.t.D",
-              "startTime": 45000,
-              "jvmId": "vm-3"
-            }
-          ]
-        }
-      ]
+      {
+        response: [
+          {
+            "systemId": "system-0",
+            "jvms": [
+              {
+                "mainClass": "c.r.t.A",
+                "startTime": 45000,
+                "jvmId": "vm-0"
+              },
+              {
+                "mainClass": "c.r.t.B",
+                "startTime": 45000,
+                "jvmId": "vm-1"
+              },
+              {
+                "mainClass": "c.r.t.C",
+                "startTime": 45000,
+                "jvmId": "vm-2"
+              },
+              {
+                "mainClass": "c.r.t.D",
+                "startTime": 45000,
+                "jvmId": "vm-3"
+              }
+            ]
+          },
+          {
+            "systemId": "system-1",
+            "jvms": [
+              {
+                "mainClass": "c.r.t.A",
+                "startTime": 45000,
+                "jvmId": "vm-0"
+              },
+              {
+                "mainClass": "c.r.t.B",
+                "startTime": 45000,
+                "jvmId": "vm-1"
+              },
+              {
+                "mainClass": "c.r.t.C",
+                "startTime": 45000,
+                "jvmId": "vm-2"
+              },
+              {
+                "mainClass": "c.r.t.D",
+                "startTime": 45000,
+                "jvmId": "vm-3"
+              }
+            ]
+          },
+          {
+            "systemId": "system-2",
+            "jvms": [
+              {
+                "mainClass": "c.r.t.A",
+                "startTime": 45000,
+                "jvmId": "vm-0"
+              },
+              {
+                "mainClass": "c.r.t.B",
+                "startTime": 45000,
+                "jvmId": "vm-1"
+              },
+              {
+                "mainClass": "c.r.t.C",
+                "startTime": 45000,
+                "jvmId": "vm-2"
+              },
+              {
+                "mainClass": "c.r.t.D",
+                "startTime": 45000,
+                "jvmId": "vm-3"
+              }
+            ]
+          },
+          {
+            "systemId": "system-3",
+            "jvms": [
+              {
+                "mainClass": "c.r.t.A",
+                "startTime": 45000,
+                "jvmId": "vm-0"
+              },
+              {
+                "mainClass": "c.r.t.B",
+                "startTime": 45000,
+                "jvmId": "vm-1"
+              },
+              {
+                "mainClass": "c.r.t.C",
+                "startTime": 45000,
+                "jvmId": "vm-2"
+              },
+              {
+                "mainClass": "c.r.t.D",
+                "startTime": 45000,
+                "jvmId": "vm-3"
+              }
+            ]
+          }
+        ]
+      }
     ));
     next();
   });

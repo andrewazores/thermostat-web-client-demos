@@ -25,9 +25,12 @@
  * exception statement from your version.
  */
 
-import unixToDate from './unix-to-date.filter.js';
-import stringToNumber from './string-to-number.filter.js';
+export default function filterProvider () {
+  return val => {
+    if (typeof val === 'string') {
+      return parseInt(val);
+    }
+    return val;
+  }
+}
 
-angular.module('app.filters', [])
-  .filter('unixToDate', unixToDate)
-  .filter('stringToNumber', stringToNumber);
