@@ -1,0 +1,45 @@
+describe('Example Testsuite', function () {
+  'use strict';
+
+  describe('Pass, Skip', function () {
+    it('should pass', function (done) {
+      done();
+    });
+    it('should also pass', function () {});
+    it.skip('should skip', function () {});
+    it('is pending');
+    // it('would fail', function (done) { done('non-empty param list'); });
+  });
+
+  describe('Arithmetic', function () {
+    describe('avg()', function () {
+
+      var avg = function (nums) {
+        var sum = 0;
+        for (var i = 0; i < nums.length; i++) {
+          sum = sum + nums[i];
+        }
+        return sum / nums.length;
+      };
+
+      it('avg([]) = NaN', function () {
+        avg([]).should.be.NaN();
+      });
+
+      var tests = [
+        {nums: [1], exp: 1},
+        {nums: [1, 1, 1], exp: 1},
+        {nums: [1, 7], exp: 4},
+        {nums: [-5, 5], exp: 0}
+      ];
+
+      tests.forEach(function (test) {
+        it('avg(' + test.nums + ') = ' + test.exp, function () {
+          avg(test.nums).should.equal(test.exp);
+        });
+      });
+    });
+  });
+
+});
+

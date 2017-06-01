@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-strict-di class="layout-pf layout-pf-fixed transitions">
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Thermostat</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <base href="/"/>
+</head>
+<body id="pf-app" class="pf-body apf-body ng-cloak">
+  <div ng-controller="AppController">
+    <nav class="navbar navbar-pf-vertical">
+      <div class="navbar-header">
+        <a ui-sref="landing" class="navbar-brand">
+          <img class="navbar-brand-icon" src="../assets/images/thermostat_logo_white_600px.png" height="57" alt="Thermostat"/>
+        </a>
+        <button hidden id="logoutButton" ng-show="loginStatus();" class="navbar-text btn btn-primary btn-sm" ng-click="logout()">Logout</button>
+        <p hidden id="envHeader" class="navbar-text label label-info infotip">{{env}}</p>
+      </div>
+    </nav>
+  </div>
+
+  <div id="centralPanel" class="container-pf-nav-pf-vertical-with-tertiary">
+    <div class="pf-framework-content">
+      <img id="splashImage" ng-hide="'true'" class="img-repsonsive img-rounded center-block" src="../assets/images/splash-image.png" alt="Splash image"/>
+      <main ui-view class="main pf-framework-view">
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

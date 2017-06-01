@@ -1,0 +1,56 @@
+<div class="container-fluid">
+
+  <div class="row" style="margin-top:2vh">
+    <div class="col-xs-12 col-md-3">
+      <label for="refreshCombo" class="label label-info">Refresh Rate</label>
+      <select name="refreshCombo" class="combobox form-control" ng-model="refreshRate">
+        <option value="-1">Disabled</option>
+        <option value="1000">1 Second</option>
+        <option value="2000" selected>2 Seconds (Default)</option>
+        <option value="5000">5 Seconds</option>
+        <option value="10000">10 Seconds</option>
+        <option value="30000">30 Seconds</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row row-cards-pf">
+    <div class="container-fluid container-cards-pf">
+
+      <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3">
+        <div class="card-pf card-pf-view">
+          <div class="card-pf-heading">
+            <label class="card-pf-title">Metaspace</label>
+          </div>
+          <div class="card-pf-body">
+            <div pf-donut-pct-chart id="metaspaceChart "config="ctrl.metaspaceConfig" data="ctrl.metaspaceData"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row row-cards-pf">
+    <div class="container-fluid container-cards-pf">
+
+        <div ng-repeat="(index, generation) in ctrl.generationData" class="col-xs-12 col-sm-6 col-lg-4 col-xl-3">
+          <div class="card-pf card-pf-view">
+            <div class="card-pf-heading">
+              <label class="card-pf-title">{{generation.name}} ({{generation.collector}})</label>
+            </div>
+            <div ng-repeat="space in generation.spaces">
+              <div class="card-pf-body text-center">
+                <label>Space {{space.index}}</label>
+                <div pf-donut-pct-chart id="gen-{{gen.index}}-space-{{space.index}}"
+                  config="ctrl.spaceConfigs['gen-' + generation.index + '-space-' + space.index]" data="space"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>
