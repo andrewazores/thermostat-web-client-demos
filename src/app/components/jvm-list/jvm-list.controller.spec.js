@@ -52,10 +52,16 @@ describe('JvmListController', () => {
   });
 
   it('should set JVMs list when service resolves', done => {
-    promise.resolve({ data: ['foo', 'bar']});
+    promise.resolve({ data: {
+      response: [{
+        jvms: [{
+          mainClass: 'foo.bar.Baz'
+        }]
+      }]
+    }});
     scope.$apply();
     ctrl.should.have.ownProperty('systems');
-    ctrl.systems.should.deepEqual(['foo', 'bar']);
+    ctrl.systems.should.deepEqual([{ jvms: [{ mainClass: 'foo.bar.Baz' }] }]);
     ctrl.showErr.should.equal(false);
     done();
   });

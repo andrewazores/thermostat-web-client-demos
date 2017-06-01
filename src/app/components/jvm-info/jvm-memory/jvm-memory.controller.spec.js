@@ -152,23 +152,23 @@ describe('JvmMemory controller', () => {
               agentId: 'foo-agentId',
               jvmId: 'foo-jvmId',
               timeStamp: 100,
-              metaspaceMaxCapacity: 0,
-              metaspaceMinCapacity: 0,
-              metaspaceCapacity: 4096,
-              metaspaceUsed: 2048,
+              metaspaceMaxCapacity: { $numberLong: '0' },
+              metaspaceMinCapacity: { $numberLong: '0' },
+              metaspaceCapacity: { $numberLong: '4096' },
+              metaspaceUsed: { $numberLong: '2048' },
               generations: [
                 {
-                  capacity: 100,
+                  capacity: { $numberLong: '100' },
                   collector: 'Shenandoah',
-                  maxCapacity: 200,
+                  maxCapacity: { $numberLong: '200' },
                   name: 'Generation 0',
                   spaces: [
                     {
-                      capacity: 50,
+                      capacity: { $numberLong: '50' },
                       index: 0,
-                      maxCapacity: 100,
+                      maxCapacity: { $numberLong: '100' },
                       name: 'Gen 0 Space 0',
-                      used: 20
+                      used: { $numberLong: '20' }
                     }
                   ]
                 }
@@ -209,8 +209,8 @@ describe('JvmMemory controller', () => {
       func(data);
       let generation = data.data.response[0].generations[0];
       let space = generation.spaces[0];
-      space.capacity = 100;
-      space.used = 50;
+      space.capacity = { $numberLong: '100' };
+      space.used = { $numberLong: '50' };
       func(data);
       ctrl.generationData.should.deepEqual({
         0: {

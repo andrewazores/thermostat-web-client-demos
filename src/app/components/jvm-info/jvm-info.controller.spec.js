@@ -84,7 +84,7 @@ describe('JvmInfoController', () => {
         response: expected
       }
     });
-    ctrl.jvmInfo.should.equal(expected);
+    ctrl.jvmInfo.should.equal(expected[0]);
   });
 
   it('should assign empty jvmInfo on promise reject', () => {
