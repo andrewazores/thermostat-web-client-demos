@@ -25,11 +25,15 @@
  * exception statement from your version.
  */
 
-import unixToDate from './unix-to-date.filter.js';
-import stringToNumber from './string-to-number.filter.js';
-import stripNumberLong from './strip-number-long.filter.js';
+export default function filterProvider () {
+  return val => {
+    if (val.hasOwnProperty('$numberLong')) {
+      return val.$numberLong;
+    }
+    return val;
+  }
+}
 
-angular.module('app.filters', [])
-  .filter('unixToDate', unixToDate)
-  .filter('stringToNumber', stringToNumber)
-  .filter('stripNumberLong', stripNumberLong);
+const filterName = 'stripNumberLong';
+
+export { filterName };

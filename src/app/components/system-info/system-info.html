@@ -23,40 +23,64 @@
           <tbody>
             <tr ng-repeat="(key, value) in ctrl.systemInfo">
               <td>{{key}}</td>
-              <td>{{value}}</td>
+              <td>{{value | stripNumberLong}}</td>
+            </tr>
+            <tr>
+              <td>Hostname</td>
+              <td>{{ctrl.systemInfo.hostname}}</td>
+            </tr>
+            <tr>
+              <td>Operating System</td>
+              <td>{{ctrl.systemInfo.osName}}</td>
+            </tr>
+            <tr>
+              <td>Kernel</td>
+              <td>{{ctrl.systemInfo.osKernel}}</td>
+            </tr>
+            <tr>
+              <td>CPU Model</td>
+              <td>{{ctrl.systemInfo.cpuModel}}</td>
+            </tr>
+            <tr>
+              <td>CPU Count</td>
+              <td>{{ctrl.systemInfo.cpuCount}}</td>
+            </tr>
+            <tr>
+              <td>Total Memory</td>
+              <td>{{ctrl.systemInfo.totalMemory.$numberLong}}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="row row-cards-pf">
-      <div class="container container-cards-pf">
+    <!-- <div class="row row-cards-pf"> -->
+    <!--   <div class="container container-cards-pf"> -->
 
-        <div class="col-xs-12 col-md-4" ng-controller="systemCpuController as ctrl">
-          <div class="card-pf card-pf-view">
-            <div class="card-pf-heading">
-              <label class="card-pf-title">CPU Usage</label>
-            </div>
-            <div class="card-pf-body">
-              <div pf-donut-pct-chart id="cpuChart" config="ctrl.config" data="ctrl.data"></div>
-            </div>
-          </div>
-        </div>
+    <!--     <div class="col-xs-12 col-md-4" ng-controller="systemCpuController as ctrl"> -->
+    <!--       <div class="card-pf card-pf-view"> -->
+    <!--         <div class="card-pf-heading"> -->
+    <!--           <label class="card-pf-title">CPU Usage</label> -->
+    <!--         </div> -->
+    <!--         <div class="card-pf-body"> -->
+    <!--           <div pf-donut-pct-chart id="cpuChart" config="ctrl.config" data="ctrl.data"></div> -->
+    <!--         </div> -->
+    <!--       </div> -->
+    <!--     </div> -->
 
-        <div class="col-xs-12 col-md-4" ng-controller="systemMemoryController as ctrl">
-          <div class="card-pf card-pf-view">
-            <div class="card-pf-heading">
-              <label class="card-pf-title">Memory Usage</label>
-            </div>
-            <div class="card-pf-body">
-              <div pf-donut-pct-chart id="memoryChart" config="ctrl.config" data="ctrl.data"></div>
-            </div>
-          </div>
-        </div>
+    <!--     <div class="col-xs-12 col-md-4" ng-controller="systemMemoryController as ctrl"> -->
+    <!--       <div class="card-pf card-pf-view"> -->
+    <!--         <div class="card-pf-heading"> -->
+    <!--           <label class="card-pf-title">Memory Usage</label> -->
+    <!--         </div> -->
+    <!--         <div class="card-pf-body"> -->
+    <!--           <div pf-donut-pct-chart id="memoryChart" config="ctrl.config" data="ctrl.data"></div> -->
+    <!--         </div> -->
+    <!--       </div> -->
+    <!--     </div> -->
 
-      </div>
-    </div>
+    <!--   </div> -->
+    <!-- </div> -->
 
   </div>
 

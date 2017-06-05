@@ -33,7 +33,7 @@ class SystemInfoController {
     $scope.systemId = systemId;
     systemInfoService.getSystemInfo(systemId).then(
       resp => {
-        this.systemInfo = resp.data.response;
+        this.systemInfo = resp.data.response[0];
         this.showErr = false;
       },
       () => {

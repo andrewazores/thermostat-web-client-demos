@@ -37,7 +37,13 @@ class SystemInfoService {
   }
 
   getSystemInfo (systemId) {
-    return this.http.get(urlJoin(this.gatewayUrl, 'system-info', systemId));
+    return this.http.get(urlJoin(this.gatewayUrl, 'systems', '0.0.1'), {
+      params: {
+        q: {
+          agentId: '==' + systemId
+        }
+      }
+    });
   }
 
   getCpuInfo (systemId) {
