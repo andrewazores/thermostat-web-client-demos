@@ -37,7 +37,9 @@ class JvmMemoryService {
   getJvmMemory (jvmId) {
     return this.http.get(urlJoin(this.gatewayUrl, 'jvm-memory', '0.0.2'), {
       params: {
-        q: 'jvmId==' + jvmId
+        q: 'jvmId==' + jvmId,
+        l: 1,
+        s: '-timeStamp'
       }
     });
   }
