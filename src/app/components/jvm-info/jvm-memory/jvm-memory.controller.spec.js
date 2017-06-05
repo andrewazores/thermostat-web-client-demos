@@ -80,10 +80,8 @@ describe('JvmMemory controller', () => {
 
   it('should assign a metaspaceConfig object', () => {
     ctrl.should.have.ownProperty('metaspaceConfig');
-    ctrl.metaspaceConfig.should.deepEqual({
-      chartId: 'metaspaceChart',
-      units: 'MiB'
-    });
+    ctrl.metaspaceConfig.should.have.ownProperty('chartId');
+    ctrl.metaspaceConfig.chartId.should.equal('metaspaceChart');
   });
 
   it('should update on init', () => {
@@ -182,8 +180,8 @@ describe('JvmMemory controller', () => {
     it('should update metaspaceData', () => {
       func(data);
       ctrl.metaspaceData.should.deepEqual({
-        used: 2048,
-        total: 4096
+        xData: [ 'ticks', 1, 2 ],
+        yData: [ 'Memory Usage', 0, 2048 ]
       });
     });
 
