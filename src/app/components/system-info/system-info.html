@@ -33,7 +33,7 @@
     <div class="row row-cards-pf">
       <div class="container container-cards-pf">
 
-        <div class="col-xs-12 col-md-4" ng-controller="systemCpuController as ctrl">
+        <div class="col-xs-12 col-md-12" ng-controller="systemCpuController as ctrl">
           <div class="card-pf card-pf-view">
             <div class="card-pf-heading">
               <label class="card-pf-title">CPU Usage</label>
@@ -44,13 +44,13 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-md-4" ng-controller="systemMemoryController as ctrl">
+        <div class="col-xs-12 col-md-12" ng-controller="systemMemoryController as ctrl">
           <div class="card-pf card-pf-view">
             <div class="card-pf-heading">
               <label class="card-pf-title">Memory Usage</label>
             </div>
             <div class="card-pf-body">
-              <div pf-donut-pct-chart id="memoryChart" config="ctrl.config" data="ctrl.data"></div>
+              <div pf-line-chart config="ctrl.config" chart-data="ctrl.data" set-area-chart="areaChart" show-x-axis="showXAxis" show-y-axis="showYAxis"></div>
             </div>
           </div>
         </div>

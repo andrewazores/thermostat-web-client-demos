@@ -26,21 +26,33 @@
  */
 
 class SystemMemoryController {
-  constructor (systemInfoService, $scope, $interval) {
+  constructor (systemInfoService, $scope, $interval, pfUtils) {
     this.svc = systemInfoService;
     this.scope = $scope;
 
-    this.data = {
-      used: 0,
-      total: 0
-    };
-
     this.config = {
       chartId: 'memoryChart',
-      units: 'MiB'
+      grid: {y: {show: false}}, // uncomment to add horizontal grid-lines
+      point: {r: 1},
+      color: {pattern: [pfUtils.colorPalette.blue]},
+      legend : {'show': true},
+      tooltip: {format: {value: function (value) { return value + '%'; }}},
+      axis: {
+        x: {
+          padding: {
+            left: 0
+          }
+        },
+        y: {
+          tick: 10
+        }
+      }
     };
 
-    this.refresh = $interval(() => this.update(), 2000);
+    // control whether or not to show axes & highlight area
+    $scope.showXAxis = false;
+    $scope.showYAxis = true;
+    $scope.areaChart = true;
 
     $scope.$on('$destroy', () => {
       if (angular.isDefined(this.refresh)) {
@@ -48,12 +60,21 @@ class SystemMemoryController {
       }
     });
 
-    this.update();
+    let numTicks = ['ticks', 1];
+    let memData = ['Memory Usage (%)', Math.round(Math.random() * 100)];
+    this.update(numTicks, memData);
+    this.refresh = $interval(() => this.update(numTicks, memData), 2000);
   }
 
-  update () {
+  update (numTicks, memData) {
     this.svc.getMemoryInfo(this.scope.systemId).then(resp => {
-      this.data = resp.data.response;
+      var usage = Math.round(resp.data.response.used / resp.data.response.total * 100);
+      memData.push(usage);
+      numTicks.push(memData.length - 1);
+      this.data = {
+        xData: numTicks,
+        yData0: memData
+      };
     });
   }
 }
