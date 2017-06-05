@@ -118,7 +118,7 @@ function jvmList (server) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(
       {
-        response: {
+        response: [{
           systemId: req.params.systemId,
           jvmId: req.params.jvmId,
           mainClass: 'c.r.t.A',
@@ -145,7 +145,7 @@ function jvmList (server) {
           uid: _.round(Math.random() * 800),
           username: 'thermostat-user',
           lastUpdated: Date.now()
-        }
+        }]
       }
     ));
     next();
