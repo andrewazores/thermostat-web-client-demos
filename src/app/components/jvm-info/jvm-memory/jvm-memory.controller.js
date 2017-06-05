@@ -41,14 +41,32 @@ class JvmMemoryController {
       total: 0
     };
 
+    // TODO: get axes displaying
     this.metaspaceConfig = {
       chartId: 'metaspaceChart',
-      units: 'MiB'
+      units: 'MiB',
+      point: { r: 1 },
+      axis: {
+        x: {
+          padding: {
+            left: 0
+          }
+        },
+        y: {
+          tick: 10
+        }
+      },
+      showXAxis: false,
+      showYAxis: true,
+      setAreaChart: true
     };
 
     this.spaceConfigs = [];
 
     this.generationData = {};
+
+    this.numMetaTicks = [ 'ticks', 1 ];
+    this.memMetaData = [ 'Memory Usage', 0 ];
 
     this.scope.$watch('refreshRate', (cur, prev) => this.setRefreshRate(cur));
 
@@ -72,12 +90,26 @@ class JvmMemoryController {
   }
 
   update () {
-    let getNumber = val => parseInt(val['$numberLong']);
+    let getNumber = val => {
+      if (typeof val === 'object') {
+        return parseInt(val['$numberLong']);
+      } else if (typeof val === 'number') {
+        return parseInt(val);
+      } else {
+        return val;
+      }
+    }
 
     this.jvmMemoryService.getJvmMemory(this.jvmId).then(resp => {
       let data = resp.data.response[0];
-      this.metaspaceData.used = getNumber(data.metaspaceUsed);
-      this.metaspaceData.total = getNumber(data.metaspaceCapacity);
+      let metaUsed = getNumber(data.metaspaceUsed);
+
+      this.memMetaData.push(metaUsed);
+      this.numMetaTicks.push(this.memMetaData.length - 1);
+      this.metaspaceData = {
+        xData: this.numMetaTicks,
+        yData: this.memMetaData
+      };
 
       for (let i = 0; i < data.generations.length; i++) {
         let generation = data.generations[i];
