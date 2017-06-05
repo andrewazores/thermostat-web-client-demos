@@ -104,7 +104,7 @@ class JvmMemoryController {
       let data = resp.data.response[0];
       let metaUsed = getNumber(data.metaspaceUsed);
 
-      this.memMetaData.push(metaUsed);
+      this.memMetaData.push(_.ceil(metaUsed / 1024));
       this.numMetaTicks.push(this.memMetaData.length - 1);
       this.metaspaceData = {
         xData: this.numMetaTicks,
@@ -127,13 +127,13 @@ class JvmMemoryController {
         for (let j = 0; j < generation.spaces.length; j++) {
           let space = generation.spaces[j];
           if (gen.spaces.hasOwnProperty(space.index)) {
-            gen.spaces[space.index].used = getNumber(space.used);
-            gen.spaces[space.index].total = getNumber(space.capacity);
+            gen.spaces[space.index].used = _.ceil(getNumber(space.used) / (1024 * 1024));
+            gen.spaces[space.index].total = _.ceil(getNumber(space.capacity) / (1024 * 1024));
           } else {
             gen.spaces[space.index] = {
               index: space.index,
-              used: getNumber(space.used),
-              total: getNumber(space.capacity)
+              used: _.ceil(getNumber(space.used) / (1024 * 1024)),
+              total: _.ceil(getNumber(space.capacity) / (1024 * 1024))
             };
           }
           let spaceKey = 'gen-' + gen.index + '-space-' + space.index;

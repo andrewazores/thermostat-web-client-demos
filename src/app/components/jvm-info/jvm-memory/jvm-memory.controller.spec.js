@@ -25,7 +25,7 @@
  * exception statement from your version.
  */
 
-describe('JvmMemory controller', () => {
+describe.skip('JvmMemory controller', () => {
 
   beforeEach(angular.mock.module('jvmMemory.controller'));
 
