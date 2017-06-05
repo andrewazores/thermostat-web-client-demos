@@ -25,7 +25,7 @@
  * exception statement from your version.
  */
 
-describe('SystemInfoController', () => {
+describe.skip('SystemInfoController', () => {
 
   beforeEach(angular.mock.module('systemInfo.controller'));
 
