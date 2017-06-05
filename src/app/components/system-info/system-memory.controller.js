@@ -43,8 +43,8 @@ class SystemMemoryController {
             left: 0
           }
         },
-        y: { 
-          tick: 10 
+        y: {
+          tick: 10
         }
       }
     };
@@ -61,20 +61,20 @@ class SystemMemoryController {
     });
 
     let numTicks = ['ticks', 1];
-    let memData = ['Memory Usage (%)', Math.round(Math.random()*100)];
+    let memData = ['Memory Usage (%)', Math.round(Math.random() * 100)];
     this.update(numTicks, memData);
     this.refresh = $interval(() => this.update(numTicks, memData), 2000);
   }
 
   update (numTicks, memData) {
     this.svc.getMemoryInfo(this.scope.systemId).then(resp => {
-      var usage = Math.round(resp.data.response.used/resp.data.response.total*100);
+      var usage = Math.round(resp.data.response.used / resp.data.response.total * 100);
       memData.push(usage);
-      numTicks.push(memData.length-1);
+      numTicks.push(memData.length - 1);
       this.data = {
         xData: numTicks,
         yData0: memData
-      }
+      };
     });
   }
 }

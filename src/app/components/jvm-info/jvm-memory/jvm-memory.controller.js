@@ -26,7 +26,7 @@
  */
 
 class JvmMemoryController {
-  constructor (jvmId, $scope, $interval, jvmMemoryService) {
+  constructor (jvmId, $scope, $interval, jvmMemoryService, pfUtils) {
     'ngInject';
 
     this.jvmId = jvmId;
@@ -36,14 +36,23 @@ class JvmMemoryController {
 
     this.scope.refreshRate = '2000';
 
-    this.metaspaceData = {
-      used: 0,
-      total: 0
-    };
-
     this.metaspaceConfig = {
       chartId: 'metaspaceChart',
-      units: 'MiB'
+      grid: {y: {show: false}}, // uncomment to add horizontal grid-lines
+      point: {r: 1},
+      color: {pattern: [pfUtils.colorPalette.blue]},
+      legend : {'show': true},
+      tooltip: {format: {value: function (value) { return value + '%'; }}},
+      axis: {
+        x: {
+          padding: {
+            left: 0
+          }
+        },
+        y: {
+          tick: 10
+        }
+      }
     };
 
     this.spaceConfigs = [];
@@ -54,7 +63,9 @@ class JvmMemoryController {
 
     this.scope.$on('$destroy', () => this.cancel());
 
-    this.update();
+    let numMetaTicks = ['ticks', 1];
+    let memMetaData = ['Memory Usage (%)', Math.round(Math.random() * 100)];
+    this.update(numMetaTicks, memMetaData);
   }
 
   cancel () {
@@ -71,10 +82,19 @@ class JvmMemoryController {
     }
   }
 
-  update () {
+  update (numMetaTicks, memMetaData) {
     let getNumber = val => parseInt(val['$numberLong']);
 
     this.jvmMemoryService.getJvmMemory(this.jvmId).then(resp => {
+
+      var usage = Math.round(resp.data.response.used / resp.data.response.total * 100);
+      memMetaData.push(usage);
+      numMetaTicks.push(memMetaData.length - 1);
+      this.metaspaceData = {
+        xData: numMetaTicks,
+        yData0: memMetaData
+      };
+
       let data = resp.data.response[0];
       this.metaspaceData.used = getNumber(data.metaspaceUsed);
       this.metaspaceData.total = getNumber(data.metaspaceCapacity);
